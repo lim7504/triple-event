@@ -2,6 +2,7 @@ package com.example.event.client;
 
 import com.example.event.config.ResponseResult;
 import com.example.event.domain.dto.AddReviewParam;
+import com.example.event.domain.dto.DeleteReviewParam;
 import com.example.event.domain.dto.ModifyReviewParam;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,7 @@ public interface ReviewServiceClient {
                                         @RequestBody ModifyReviewParam modifyReviewParam);
 
     @DeleteMapping("reviews/{review-id}")
-    ResponseResult<Object> deleteReview(@PathVariable("review-id") String reviewId);
+    ResponseResult<Object> deleteReview(@PathVariable("review-id") String reviewId,
+                                        @RequestBody DeleteReviewParam deleteReviewParam);
 
 }

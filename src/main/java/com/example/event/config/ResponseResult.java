@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class ResponseResult<T> {
 
-    private String code;
+    private Code code;
 
     private T data;
 
@@ -28,12 +28,12 @@ public class ResponseResult<T> {
     private HttpStatus httpStatus;
 
     public ResponseResult(Code code) {
-        this.code = code.getCode();
+        this.code = code;
         this.message = code.getMessage();
     }
 
     public ResponseResult(String message) {
-        this.code = Code.SERVER_ERROR.getCode();
+        this.code = Code.SERVER_ERROR;
         this.message = message;
     }
 
@@ -49,23 +49,6 @@ public class ResponseResult<T> {
         return with(data).code(Code.SUCCESS).message(message).httpStatus(HttpStatus.OK);
     }
 
-    public static <T> ResponseResult<T> fail(@NotNull Code code) {
-        return with((T) null).code(code).httpStatus(code.getStatus());
-    }
-
-    public static <T> ResponseResult<T> fail(@NotNull Code code, T data) {
-        return with(data).code(code).httpStatus(code.getStatus());
-    }
-
-    public static <T> ResponseResult<T> fail(@NotNull Code code, String message) {
-        return with((T) null).code(code).message(message).httpStatus(code.getStatus());
-    }
-
-    public static <T> ResponseResult<T> fail(Code code, String message, HttpStatus httpStatus) {
-        return with((T) null).code(code).message(message).httpStatus(httpStatus);
-    }
-
-
     private static <T> ResponseResult<T> with(T data) {
         ResponseResult<T> response = new ResponseResult<>();
         response.data = data;
@@ -73,7 +56,7 @@ public class ResponseResult<T> {
     }
 
     public ResponseResult<T> code(@NotNull Code code) {
-        this.code = code.getCode();
+        this.code = code;
         return this;
     }
 
@@ -88,11 +71,7 @@ public class ResponseResult<T> {
     }
 
     public ResponseEntity createResponseEntity() {
-        return ResponseEntity.status(HttpStatus.OK).body(this);
+        return ResponseEntity.status(this.httpStatus).body(this);
     }
 
-    @JsonIgnore
-    public boolean isSuccess() {
-        return this.code.equals(Code.SUCCESS.getCode());
-    }
 }

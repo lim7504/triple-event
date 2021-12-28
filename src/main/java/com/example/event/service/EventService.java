@@ -7,10 +7,13 @@ import com.example.event.domain.dto.EventParam;
 import com.example.event.repository.EventHistoryRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Map;
+
+import static org.springframework.http.HttpStatus.OK;
 
 @Service
 @RequiredArgsConstructor
@@ -21,7 +24,7 @@ public class EventService {
     private final Map<EventType, EventAction> eventActionMap;
 
     @Transactional
-    public ResponseResult<Object> addEvent(EventParam eventParam) {
+    public Object addEvent(EventParam eventParam) {
         EventHistory eventHistory = EventHistory.createEventHistory(eventParam);
         this.eventHistoryRepository.save(eventHistory);
         EventAction eventAction = this.eventActionMap.get(eventParam.getType());

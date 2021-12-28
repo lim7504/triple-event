@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-public class ServiceCustomBean {
+public class ServiceConfiguration {
 
     @Bean
     public Map<EventType, EventAction> getEventAction(ReviewService reviewService, PostService postService) {

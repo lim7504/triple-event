@@ -6,9 +6,10 @@ import com.example.event.service.EventService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.UUID;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/events")
@@ -19,11 +20,8 @@ public class EventController {
 
     @PostMapping
     public ResponseEntity<Object> addEvent(@Validated @RequestBody EventParam eventParam) {
-        return this.eventService.addEvent(eventParam).createResponseEntity();
+        Object result = this.eventService.addEvent(eventParam);
+        return ResponseResult.ok(result).createResponseEntity();
     }
 
-    @GetMapping
-    public ResponseEntity get() {
-        return ResponseEntity.ok(UUID.randomUUID().toString());
-    }
 }

@@ -1,5 +1,6 @@
 package com.example.event.config;
 
+import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Getter;
 import lombok.ToString;
 import org.springframework.http.HttpStatus;
@@ -15,7 +16,12 @@ public enum Code {
     NOT_FOUND("CM_0004", "페이지를 찾을 수 없습니다.", HttpStatus.NOT_FOUND),
 
     //Account
-    ACCOUNT_NOT_FOUND("AC_0001", "해당 회원을 찾을 수 없습니다.", HttpStatus.BAD_REQUEST),;
+    ACCOUNT_NOT_FOUND("AC_0001", "해당 회원을 찾을 수 없습니다.", HttpStatus.BAD_REQUEST),
+
+    //Review
+    REVIEW_NOT_FOUND("RV_0001", "해당 리뷰를 찾을 수 없습니다.", HttpStatus.BAD_REQUEST),
+    ALREADY_REVIEW_IN_PLACE("RV_0002", "이미 해당 장소에 리뷰를 등록하였습니다.", HttpStatus.BAD_REQUEST),
+    NOT_WRITER_OF_THE_REVIEW("RV_0003", "해당 리뷰의 작성자가 아닙니다.", HttpStatus.BAD_REQUEST);
 
     private final String code;
     private String message;
@@ -25,6 +31,11 @@ public enum Code {
         this.code = code;
         this.message = message;
         this.status = status;
+    }
+
+    @JsonValue
+    public String getCode() {
+        return this.code;
     }
 }
 

@@ -17,7 +17,7 @@ public class TripleEventApplication {
         SpringApplication.run(TripleEventApplication.class, args);
     }
 
-    @Bean
+//    @Bean
     public FeignErrorDecoder getFeignErrorDecoder() {
         return new FeignErrorDecoder();
     }

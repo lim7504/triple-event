@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @Slf4j
-@ControllerAdvice(basePackages = {"com.example.triple"})
+@ControllerAdvice(basePackages = {"com.example.event"})
 public class ExceptionController {
 
     @ExceptionHandler(Exception.class)

@@ -2,7 +2,10 @@ package com.example.event.domain.dto;
 
 import com.example.event.domain.Action;
 import com.example.event.domain.EventType;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -10,6 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class EventParam {
 
     @NotNull
@@ -48,6 +54,10 @@ public class EventParam {
     }
 
     public ModifyReviewParam getModifyReviewParam() {
-        return ModifyReviewParam.createReviewParam(this.content, this.attachedPhotoIds);
+        return ModifyReviewParam.createReviewParam(this.userId, this.content, this.attachedPhotoIds);
+    }
+
+    public DeleteReviewParam getDeleteReviewParam() {
+        return DeleteReviewParam.createReviewParam(this.userId);
     }
 }

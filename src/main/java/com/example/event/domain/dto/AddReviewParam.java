@@ -15,6 +15,7 @@ public class AddReviewParam {
     @Size(min = 36, max = 36)
     private String placeId;
 
+    @Size(min = 1)
     private String content;
 
     private List<@Size(min = 36, max = 36) String> attachedPhotoIds = new ArrayList<>();
